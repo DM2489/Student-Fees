@@ -6,15 +6,16 @@ using System.Linq;
 
 namespace Student_Fees.Controllers
 {
-    public class HomeController : Controller
+    public class StudentController : Controller
     {
         private readonly StudentFeesDbContext StudentFeesDbContext;
 
-        public HomeController(StudentFeesDbContext studentFeesDbContext)
+        public StudentController(StudentFeesDbContext studentFeesDbContext)
         {
             StudentFeesDbContext = studentFeesDbContext;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             // Get the students and their payment history from the StudentFeesDbContext.

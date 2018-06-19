@@ -32,6 +32,16 @@ namespace Student_Fees
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            services.AddAntiforgery(options =>
+            {
+                options.Cookie.Domain = "localhost:44301";
+                options.Cookie.Name = "X-CSRF-TOKEN";
+                options.Cookie.Path = "Path";
+                options.FormFieldName = "__RequestVerificationToken";
+                options.HeaderName = "X-CSRF-TOKEN";
+                options.SuppressXFrameOptionsHeader = false;
+            });
+
             services.AddMvc();
         }
 
@@ -63,7 +73,7 @@ namespace Student_Fees
             {
                 routes.MapRoute(
                     name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
+                    template: "{controller=Student}/{action=Index}/{id?}");
             });
         }
     }
