@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Linq;
 
 namespace Student_Fees.Models
 {
@@ -10,6 +12,22 @@ namespace Student_Fees.Models
 
         public string Surname { get; set; }
 
-        public List<Payment> Payments { get; set; }
+        public List<Payment> Payments { get; set; } = new List<Payment>();
+
+        [NotMapped]
+        public decimal TotalPaymentAmount
+        {
+            get
+            {
+                if (Payments.Count > 0)
+                {
+                    return Payments.Sum(payment => payment.Amount);
+                }
+                else
+                {
+                    return 0.0m;
+                }
+            }
+        }
     }
 }

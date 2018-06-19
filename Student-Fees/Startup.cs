@@ -22,7 +22,7 @@ namespace Student_Fees
             // Add the StudentFeesDbContext and configure it to use an in-memory database.
             services.AddDbContext<StudentFeesDbContext>(opt => opt.UseInMemoryDatabase("StudentFeesDb"));
 
-            // Register the database seeder
+            // Add the StartupData class.
             services.AddTransient<StartupData>();
 
             services.Configure<CookiePolicyOptions>(options =>
@@ -38,6 +38,7 @@ namespace Student_Fees
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            // Get the StartupData class and create the startup data.
             using (var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
                 StartupData startupData = serviceScope.ServiceProvider.GetService<StartupData>();

@@ -1,6 +1,110 @@
-﻿<div class="row">
+﻿@using Student_Fees.Models;
+
+@{
+    List<Student> students = Model;
+}
+
+<div class="row">
     <div class="col">
-        <h1>Title</h1>
-        <p>Content</p>
+        <h1>Student Fees</h1>
+        <p>An application to record and track fees paid by students.</p>
+
+        <table class="table table-bordered table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col" class="text-center">Id</th>
+                    <th scope="col" class="text-center">Forename</th>
+                    <th scope="col" class="text-center">Surname</th>
+                    <th scope="col" class="text-center">Total Payment Amount</th>
+                    <th scope="col" class="text-center">Payment History</th>
+                    <th scope="col" class="text-center">Add Payment</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (Student student in students)
+                    {
+                        <tr>
+                            <td class="text-center">@student.Id</td>
+                            <td class="text-center">@student.Forename</td>
+                            <td class="text-center">@student.Surname</td>
+                            <td class="text-center">@($"{student.TotalPaymentAmount:c}")</td>
+                            <td class="text-center">
+                                @{
+                                    if (student.Payments.Count > 0)
+                                    {
+                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="@($"#{student.Id}-payment-history")">View Payments</button>
+                                        <div class="modal fade" id="@($"{student.Id}-payment-history")" tabindex="-1" role="dialog" aria-hidden="true">
+                                            <div class="modal-dialog modal-lg" role="document">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title">Payment History</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p class="text-left">Payments made by @($"{student.Forename} {student.Surname}").</p>
+                                                        @{
+                                                            <table class="table table-bordered table-striped">
+                                                                <thead class="thead-dark">
+                                                                    <tr>
+                                                                        <th scope="col" class="text-center">Amount</th>
+                                                                        <th scope="col" class="text-center">Date</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    @{
+                                                                        foreach (Payment payment in student.Payments)
+                                                                        {
+                                                                            <tr>
+                                                                                <td class="text-center">@($"{payment.Amount:c}")</td>
+                                                                                <td class="text-center">@($"{payment.Date:dd/MM/yyy}")</td>
+                                                                            </tr>
+                                                                        }
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        }
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" class="btn btn-secondary" disabled>View Payments</button>
+                                    }
+                                }
+                            </td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="@($"#{student.Id}-add-payment")">Add New Payment</button>
+                                <div class="modal fade" id="@($"{student.Id}-add-payment")" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title">Add Payment</h5>
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
     </div>
 </div>
