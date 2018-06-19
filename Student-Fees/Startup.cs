@@ -32,15 +32,7 @@ namespace Student_Fees
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
-            services.AddAntiforgery(options =>
-            {
-                options.Cookie.Domain = "localhost:44301";
-                options.Cookie.Name = "X-CSRF-TOKEN";
-                options.Cookie.Path = "Path";
-                options.FormFieldName = "__RequestVerificationToken";
-                options.HeaderName = "X-CSRF-TOKEN";
-                options.SuppressXFrameOptionsHeader = false;
-            });
+            services.AddAntiforgery(options => options.HeaderName = "X-CSRF-TOKEN");
 
             services.AddMvc();
         }

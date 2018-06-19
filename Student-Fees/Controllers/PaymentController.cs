@@ -15,7 +15,7 @@ namespace Student_Fees.Controllers
         }
 
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public IActionResult Create([FromBody] Payment payment)
         {
             // Check that the ModelState is valid.

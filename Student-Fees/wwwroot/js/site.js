@@ -13,20 +13,19 @@
                     $.each($(event.target).serializeArray(), function (index, item) {
                         serialisedForm[item.name] = item.value;
                     });
-                    var formData = JSON.stringify(serialisedForm);
 
                     // Handle CSRF token.
-                    var __RequestVerificationToken = formData.__RequestVerificationToken;
-                    delete formData.__RequestVerificationToken;
+                    var csrfToken = serialisedForm.__RequestVerificationToken;
+                    delete serialisedForm.__RequestVerificationToken;
 
                     // Send an ajax POST request to create the new payment object.
                     $.ajax({
                         method: 'POST',
                         contentType: 'application/json',
                         url: '/payment',
-                        data: formData,
+                        data: JSON.stringify(serialisedForm),
                         headers: {
-                            'X-CSRF-TOKEN': __RequestVerificationToken
+                            'X-CSRF-TOKEN': csrfToken
                         }
                     }).done(function (response) {
                         location.reload();
