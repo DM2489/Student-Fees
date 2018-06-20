@@ -62,6 +62,7 @@ namespace Student_Fees
             app.UseStaticFiles();
             app.UseCookiePolicy();
 
+            // Define the default route tobe our Student/index controller and method.
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

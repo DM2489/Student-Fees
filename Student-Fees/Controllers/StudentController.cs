@@ -19,6 +19,10 @@ namespace Student_Fees.Controllers
             StudentFeesDbContext = studentFeesDbContext;
         }
 
+        /// <summary>
+        /// Method to get students and their payments.
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Index()
         {

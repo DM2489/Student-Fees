@@ -8,15 +8,22 @@ namespace Student_Fees
     {
         private readonly StudentFeesDbContext StudentFeesDbContext;
 
+        /// <summary>
+        /// Constructor. Gets the StudentFeesDbContext from Dependency Injection.
+        /// </summary>
+        /// <param name="studentFeesDbContext"></param>
         public StartupData(StudentFeesDbContext studentFeesDbContext)
         {
             StudentFeesDbContext = studentFeesDbContext;
         }
 
+        /// <summary>
+        /// Method to create entities and save them to the StudentFeesDbContext.
+        /// </summary>
         public void Create()
         {
             // Define startup students.
-            List<Student> startupStudents = new List<Student>
+            Student[] startupStudents = new Student[]
             {
                 new Student
                 {
@@ -46,7 +53,7 @@ namespace Student_Fees
             };
 
             // Define startup payments.
-            List<Payment> startupPayments = new List<Payment>
+            Payment[] startupPayments = new Payment[]
             {
                 new Payment
                 {
