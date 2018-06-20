@@ -32,6 +32,7 @@ namespace Student_Fees
                 options.MinimumSameSitePolicy = SameSiteMode.None;
             });
 
+            // Set antiforgery with a specific header name.
             services.AddAntiforgery(options => options.HeaderName = "X-CSRF-TOKEN");
 
             services.AddMvc();

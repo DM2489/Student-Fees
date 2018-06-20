@@ -22,6 +22,7 @@ namespace Student_Fees.Models
         {
             get
             {
+                // Return the som of any payments for the student.
                 if (Payments.Count > 0)
                 {
                     return Payments.Sum(payment => payment.Amount);

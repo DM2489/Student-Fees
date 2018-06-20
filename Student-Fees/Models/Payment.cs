@@ -10,8 +10,10 @@ namespace Student_Fees.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long Id { get; set; }
 
+        [Required]
         public long StudentId { get; set; }
 
+        [Required]
         public decimal Amount { get; set; }
 
         public DateTime Date { get; set; }

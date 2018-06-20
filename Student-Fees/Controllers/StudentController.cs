@@ -10,6 +10,10 @@ namespace Student_Fees.Controllers
     {
         private readonly StudentFeesDbContext StudentFeesDbContext;
 
+        /// <summary>
+        /// Constructor. Gets the StudentFeesDbContext from Dependency Injection.
+        /// </summary>
+        /// <param name="studentFeesDbContext"></param>
         public StudentController(StudentFeesDbContext studentFeesDbContext)
         {
             StudentFeesDbContext = studentFeesDbContext;
@@ -18,9 +22,8 @@ namespace Student_Fees.Controllers
         [HttpGet]
         public IActionResult Index()
         {
-            // Get the students and their payment history from the StudentFeesDbContext.
+            // Get the students and their payment history from the StudentFeesDbContext. Pass students to the view.
             List<Student> students = StudentFeesDbContext.Students.AsNoTracking().Include(r => r.Payments).ToList();
-
             return View(students);
         }
     }

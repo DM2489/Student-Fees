@@ -9,8 +9,14 @@ namespace Student_Fees
         {
         }
 
+        /// <summary>
+        /// A DbSet to represent students.
+        /// </summary>
         public DbSet<Student> Students { get; set; }
 
+        /// <summary>
+        /// A DbSet to represent payments.
+        /// </summary>
         public DbSet<Payment> Payments { get; set; }
     }
 }

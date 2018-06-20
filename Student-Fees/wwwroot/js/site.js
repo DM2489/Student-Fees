@@ -1,4 +1,4 @@
-﻿// Validating and submiting forms.
+﻿// Validating and submitting forms.
 (function () {
     'use strict';
     window.addEventListener('load', function () {
@@ -14,7 +14,7 @@
                         serialisedForm[item.name] = item.value;
                     });
 
-                    // Handle CSRF token.
+                    // Handle the CSRF token - it needs to be added in the header and removed from the POST body.
                     var csrfToken = serialisedForm.__RequestVerificationToken;
                     delete serialisedForm.__RequestVerificationToken;
 
@@ -28,6 +28,7 @@
                             'X-CSRF-TOKEN': csrfToken
                         }
                     }).done(function (response) {
+                        // Reload the page upon success.
                         location.reload();
                     }).fail(function (jqXHR, textStatus) {
                         if (jqXHR.responseJSON !== null) {
