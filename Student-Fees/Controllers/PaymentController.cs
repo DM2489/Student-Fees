@@ -35,7 +35,7 @@ namespace Student_Fees.Controllers
                     // Set the date of the payment.
                     payment.Date = DateTime.Now;
 
-                    // Add the payment to the StudentFeesDbContext.
+                    // Add the payment to the StudentFeesDbContext and save the changes.
                     StudentFeesDbContext.Payments.Add(payment);
                     StudentFeesDbContext.SaveChanges();
 

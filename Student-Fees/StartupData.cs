@@ -1,6 +1,5 @@
 ﻿using Student_Fees.Models;
 using System;
-using System.Collections.Generic;
 
 namespace Student_Fees
 {
